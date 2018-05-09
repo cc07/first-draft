@@ -33,10 +33,6 @@ plugins:
 # to override the default setting.
 exclude:
   - deploy.sh
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+  - vendor/
+  - Gemfile
+  - Gemfile.lock
