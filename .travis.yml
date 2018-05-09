@@ -9,6 +9,10 @@ script: ./script/cibuild
 
 sudo: false
 
+cache: pip
+install:
+  - pip install --user awscli
+
 deploy:
   on:
     branch: master
@@ -18,3 +22,7 @@ deploy:
   bucket: first-draft
   skip_cleanup: true
   local_dir: _site
+
+after_deploy:
+- aws configure set preview.cloudfront true
+- test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
