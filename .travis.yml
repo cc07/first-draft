@@ -16,13 +16,8 @@ install:
 deploy:
   on:
     branch: master
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: first-draft
+  provider: firebase
+  token:
+    secure: $FIREBASE_TOKEN
   skip_cleanup: true
   local_dir: _site
-
-after_deploy:
-- aws configure set preview.cloudfront true
-- test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
